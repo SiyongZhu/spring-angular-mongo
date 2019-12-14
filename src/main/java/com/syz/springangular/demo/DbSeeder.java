@@ -31,7 +31,7 @@ public class DbSeeder implements CommandLineRunner {
 		
 		Book particle = new Book("Elementary Particle", 
 				"One man invented clone tech to stay imortal", 
-				"Michel Heclluqbec",
+				Arrays.asList("Michel Heclluqbec"),
 				"fiction",
 				Arrays.asList("sci-fi", "satire"),
 				new ArrayList<>());

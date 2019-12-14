@@ -12,18 +12,18 @@ public class Book {
 	private String id;
 	private String title;
 	private String description;
-	private String author;
+	private List<String> authors;
 	private String genre;
 	private List<String> tags;
 	private List<Review> reviews;
 	private int likes;
 	
-	public Book(String title, String description, String author, 
+	public Book(String title, String description, List<String> authors, 
 			String genre, List<String> tags, List<Review> reviews) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.author = author;
+		this.authors = authors;
 		this.genre = genre;
 		this.tags = tags;
 		this.reviews = reviews;
@@ -37,8 +37,8 @@ public class Book {
 		return description;
 	}
 
-	public String getAuthor() {
-		return author;
+	public List<String> getAuthors() {
+		return authors;
 	}
 
 	public String getGenre() {
