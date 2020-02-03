@@ -30,8 +30,8 @@ public class DbSeeder implements CommandLineRunner {
 		System.out.println("\n\nPrepare Mongo DB\n\n");
 		
 		Book particle = new Book("Elementary Particle", 
-				"One man invented clone tech to stay imortal", 
-				Arrays.asList("Michel Heclluqbec"),
+				"One man invented clone tech to stay immortal", 
+				Arrays.asList("Michel Houellebecq"),
 				"fiction",
 				Arrays.asList("sci-fi", "satire"),
 				new ArrayList<>());

@@ -4,6 +4,7 @@ public class Review {
 	private String reviewer;
 	private String message;
 	
+	
 	public Review(String reviewer, String message) {
 		super();
 		this.reviewer = reviewer;

@@ -1,5 +1,27 @@
 # Spring Boot Mongo and Angular
 
+
+**RabbitMQ Setup**
+```
+docker run -d --hostname sy-rabbitmq --name my_rabbit -p 15672:15672 -p 5671:5671 -p 5672:5672 rabbitmq:3.8-management
+```
+
+**Start Centos Docker**
+```
+#Constantly running a centos docker container in the background
+docker run -d centos tail -f /dev/null 
+# ssh into the centos container
+docker exec -it [container_id] bash
+>yum install java
+```
+
+**How to build docker image from maven**
+```
+mvn clean package docker:build
+docker run -d -p 8080:8080 [image_name]
+docker log -f [container_id]
+```
+
 **MongoDB Setup**
 Commands to setup mongoDB
 ```

@@ -21,8 +21,8 @@ public class BookController {
 	
 	@GetMapping("/all")
 	public List<Book> getAll(){
-		List<Book> hotels = this.bookRepository.findAll();
-		return hotels;
+		List<Book> books = this.bookRepository.findAll();
+		return books;
 	}
 	
 }

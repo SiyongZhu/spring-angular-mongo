@@ -1,5 +1,6 @@
 package com.syz.springangular.demo.models;
 
+import java.net.URL;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -17,6 +18,8 @@ public class Book {
 	private List<String> tags;
 	private List<Review> reviews;
 	private int likes;
+	
+	private List<URL> url;
 	
 	public Book(String title, String description, List<String> authors, 
 			String genre, List<String> tags, List<Review> reviews) {
