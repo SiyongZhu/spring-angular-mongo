@@ -1,5 +1,10 @@
 # Spring Boot Mongo and Angular
 
+**MongoDB Setup**
+```
+docker run -d --volume /data/db --name vc_mongo_shared alpine echo Data container
+docker run -d --volumes-from vc_mongo_shared -p 27017-27019:27017-27019 --name my_mongodb mongo:4.0.4
+```
 
 **RabbitMQ Setup**
 ```
@@ -15,10 +20,17 @@ docker exec -it [container_id] bash
 >yum install java
 ```
 
+**Normal Development**
+With mongoDB running locally, we can run springboot on localhost \
+from either IDE or maven `mvn spring-boot:run`
+
 **How to build docker image from maven**
 ```
-mvn clean package docker:build
-docker run -d -p 8080:8080 [image_name]
+#When build docker image, change datasource from localhost to my_mongodb, then
+mvn clean package -DskipTests docker:build
+docker run --name bookStore -p 8080:8080 \
+--link my_mongodb:my_mongodb \
+siyongdocker/springmongodocker
 docker log -f [container_id]
 ```
 

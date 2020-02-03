@@ -83,10 +83,15 @@
 									<descriptorRef>artifact</descriptorRef>
 								</assembly>
 								<tags>
-									<tag>latest</tag>
+									<!-- <tag>latest</tag> can add multiple tags-->
 									<tag>${project.version}</tag>
 								</tags>
 							</build>
+							<run>
+								<ports>
+									<port>8080:8080</port>
+								</ports>
+							</run>
                     	</image>
                     </images>
         		</configuration>		
