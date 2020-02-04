@@ -28,10 +28,16 @@ from either IDE or maven `mvn spring-boot:run`
 ```
 #When build docker image, change datasource from localhost to my_mongodb, then
 mvn clean package -DskipTests docker:build
+
+#Now we can run app by connecting two containers together
 docker run --name bookStore -p 8080:8080 \
 --link my_mongodb:my_mongodb \
 siyongdocker/springmongodocker
 docker log -f [container_id]
+
+#Or after building docker image, we can start both mongodb and microservice together
+docker-compose up -d
+docker-compose down
 ```
 
 **MongoDB Setup**

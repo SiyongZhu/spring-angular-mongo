@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+    my_mongodb:
+     image: mongo:4.0.4
+     volumes:
+       - data_volume:/data/db
+     restart: always
+
+    book_store:
+     depends_on:
+       - my_mongodb
+     image: siyongdocker/springmongodocker:latest
+     ports:
+       - "8080:8080"
+     restart: always
+
+volumes:
+    data_volume: 
