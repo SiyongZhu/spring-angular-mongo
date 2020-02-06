@@ -27,7 +27,7 @@ from either IDE or maven `mvn spring-boot:run`
 **How to build docker image from maven**
 ```
 #When build docker image, change datasource from localhost to my_mongodb, then
-mvn clean package -DskipTests docker:build
+mvn clean package docker:build
 
 #Now we can run app by connecting two containers together
 docker run --name bookStore -p 8080:8080 \
