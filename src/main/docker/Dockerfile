@@ -1,4 +1,4 @@
-FROM openjdk
+FROM openjdk:8
 
 VOLUME /tmp
 ADD maven/spring-angular-mongo-0.0.1-SNAPSHOT.jar myapp.jar
