@@ -1,7 +1,11 @@
 package com.syz.springangular.demo;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,7 @@ public class DbSeeder implements CommandLineRunner {
 	
 	private BookRepository bookRepository;
 	
+	
 	@Autowired
 	public DbSeeder(BookRepository bookRepository) {
 		this.bookRepository = bookRepository;
@@ -29,10 +34,13 @@ public class DbSeeder implements CommandLineRunner {
 
 		System.out.println("\n\nPrepare Mongo DB\n\n");
 		
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter fmt2 = DateTimeFormatter.ofPattern("yyyy-MM");
+		String sYearMonth = "2006-10";
+	
 		Book particle = new Book("Elementary Particle", 
-				"One man invented clone tech to stay immortal", 
+		        sYearMonth,
 				Arrays.asList("Michel Houellebecq"),
-				"fiction",
 				Arrays.asList("sci-fi", "satire"),
 				new ArrayList<>());
 		

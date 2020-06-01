@@ -1,6 +1,5 @@
 package com.syz.springangular.demo.models;
 
-import java.net.URL;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -12,22 +11,18 @@ public class Book {
 	@Id
 	private String id;
 	private String title;
-	private String description;
 	private List<String> authors;
-	private String genre;
 	private List<String> tags;
 	private List<Review> reviews;
+	private String publication;
 	private int likes;
 	
-	private List<URL> url;
 	
-	public Book(String title, String description, List<String> authors, 
-			String genre, List<String> tags, List<Review> reviews) {
+	public Book(String title, String publication, List<String> authors, List<String> tags, List<Review> reviews) {
 		super();
 		this.title = title;
-		this.description = description;
+		this.publication = publication;
 		this.authors = authors;
-		this.genre = genre;
 		this.tags = tags;
 		this.reviews = reviews;
 	}
@@ -36,16 +31,12 @@ public class Book {
 		return title;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
 	public List<String> getAuthors() {
 		return authors;
 	}
 
-	public String getGenre() {
-		return genre;
+	public String getPublication() {
+	    return publication;
 	}
 
 	public List<String> getTags() {

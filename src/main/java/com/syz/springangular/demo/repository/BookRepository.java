@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.syz.springangular.demo.models.Book;
 
-// When extends MongoRepository <type of entity, type of String>
+// When extends MongoRepository <type of entity, type of id(which is a string)>
 @Repository
 public interface BookRepository extends MongoRepository<Book, String> {
 
