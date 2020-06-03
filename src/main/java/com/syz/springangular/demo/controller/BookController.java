@@ -2,6 +2,9 @@ package com.syz.springangular.demo.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.syz.springangular.demo.models.Book;
 import com.syz.springangular.demo.repository.BookRepository;
 
+@CrossOrigin(origins = "http://localhost:4200") //or use * to denote all requests origin are ok
 @RestController
 @RequestMapping("/books")
 public class BookController {
 
 	private BookRepository bookRepository;
+	
+	Logger logger = LoggerFactory.getLogger(BookController.class);
 	
 	public BookController(BookRepository bookRepository) {
 		this.bookRepository = bookRepository;
@@ -43,6 +49,7 @@ public class BookController {
 	
 	@GetMapping("/all")
 	public List<Book> getAll(){
+	    logger.info("Listing All Books");
 		List<Book> books = this.bookRepository.findAll();
 		return books;
 	}

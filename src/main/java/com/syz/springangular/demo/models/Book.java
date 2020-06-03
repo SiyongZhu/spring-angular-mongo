@@ -1,5 +1,6 @@
 package com.syz.springangular.demo.models;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -12,19 +13,19 @@ public class Book {
 	private String id;
 	private String title;
 	private List<String> authors;
+	private String imageUrl;
+	private Date publishDate;
 	private List<String> tags;
 	private List<Review> reviews;
-	private String publication;
-	private int likes;
+	private boolean likes;
 	
 	
-	public Book(String title, String publication, List<String> authors, List<String> tags, List<Review> reviews) {
+	public Book(String title, List<String> authors, Date publishDate, List<String> tags) {
 		super();
 		this.title = title;
-		this.publication = publication;
 		this.authors = authors;
+		this.publishDate = publishDate;
 		this.tags = tags;
-		this.reviews = reviews;
 	}
 
 	public String getTitle() {
@@ -35,21 +36,33 @@ public class Book {
 		return authors;
 	}
 
-	public String getPublication() {
-	    return publication;
-	}
-
 	public List<String> getTags() {
 		return tags;
 	}
 
-	public int getLikes() {
+	public boolean getLikes() {
 		return likes;
 	}
 
 	public List<Review> getReviews() {
 		return reviews;
 	}
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
+    }
 	
 	
 	
