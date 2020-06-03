@@ -73,3 +73,22 @@ Commands to setup mongoDB
    }
 ])
 ```
+
+
+**Export/Import MongoDB data**
+```
+docker exec -it my_mongodb /bin/bash
+```
+Inside docker shell, export data 
+```
+mongoexport -d angularSpring -c Books -o /data/books.json --jsonArray
+```
+Copy data out from docker container
+```
+docker cp <containerId>:/data/books.json /host/path/target
+```
+
+Import follow the same process, but using `mongoimport`
+```
+mongoimport --d angularSpring -c Books --file books.json --jsonArray
+```

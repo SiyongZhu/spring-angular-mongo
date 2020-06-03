@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Books")
@@ -11,7 +12,10 @@ public class Book {
 
 	@Id
 	private String id;
+	
+	@TextIndexed
 	private String title;
+	@TextIndexed
 	private List<String> authors;
 	private String imageUrl;
 	private Date publishDate;
