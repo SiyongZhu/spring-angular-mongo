@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,6 +20,7 @@ public class Book {
 	@TextIndexed
 	private List<String> authors;
 	private String imageUrl;
+	@Indexed(direction = IndexDirection.DESCENDING)
 	private Date publishDate;
 	private List<String> tags;
 	private List<Review> reviews;
