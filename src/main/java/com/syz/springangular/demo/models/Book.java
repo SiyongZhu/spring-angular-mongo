@@ -26,6 +26,9 @@ public class Book {
 	private List<Review> reviews;
 	private boolean likes;
 	
+	public Book (){
+        
+    }
 	
 	public Book(String title, List<String> authors, Date publishDate, List<String> tags) {
 		super();

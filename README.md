@@ -92,3 +92,14 @@ Import follow the same process, but using `mongoimport`
 ```
 mongoimport --d angularSpring -c Books --file books.json --jsonArray
 ```
+
+To package the web app
+```
+cd path/to/spring-angular-mongo
+mvn clean install
+mvn spring-boot:run
+java -jar target/spring-angular-mongo-0.0.1-SANPSHOT.jar
+
+```
+
+

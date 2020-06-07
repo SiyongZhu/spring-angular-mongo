@@ -1,6 +1,8 @@
 package com.syz.springangular.demo.controller;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +32,11 @@ public class BookController {
 		this.bookRepository = bookRepository;
 	}
 	
+	@GetMapping("/{id}")
+	public Book getById(@PathVariable String id) {
+	    Optional<Book> book = this.bookRepository.findById(id);
+	    return book.orElse(new Book());
+	}
 	@PostMapping
 	//insert(): if id value not in collection, will insert, otherwise, throw duplicate key exception
 	public void insert(@RequestBody Book book) {
@@ -51,6 +58,12 @@ public class BookController {
 	public List<Book> getAll(){
 	    logger.info("Listing All Books");
 		List<Book> books = this.bookRepository.findAll();
+		books.sort(new Comparator<Book>() {
+		    @Override
+		    public int compare(Book o1, Book o2) {
+		        return 0 - o1.getPublishDate().compareTo(o2.getPublishDate());
+		    }
+        });
 		return books;
 	}
 	
