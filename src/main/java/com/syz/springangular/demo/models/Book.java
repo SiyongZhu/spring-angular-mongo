@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.TextScore;
 
 @Document(collection = "Books")
 public class Book {
@@ -25,6 +26,9 @@ public class Book {
 	private List<String> tags;
 	private List<Review> reviews;
 	private boolean likes;
+	
+	@TextScore
+	private Float textScore;
 	
 	public Book (){
         
@@ -73,6 +77,11 @@ public class Book {
     public void setPublishDate(Date publishDate) {
         this.publishDate = publishDate;
     }
+
+    public Float getTextScore() {
+        return textScore;
+    }
+
 	
 	
 	

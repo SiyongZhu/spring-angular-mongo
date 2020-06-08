@@ -41,12 +41,13 @@ docker-compose down
 ```
 
 **MongoDB Setup**
-Commands to setup mongoDB
+Commands for mongoDB
 ```
 > use angularSpring
-> db.createCollection("Book")
-> db.Book.find().pretty()
-> db.Book.insert([
+> db.createCollection("Books")
+> show collections
+> db.Books.find().pretty()
+> db.Books.insert([
    {
       title: 'MongoDB Overview', 
       description: 'MongoDB is no sql database',
@@ -72,6 +73,12 @@ Commands to setup mongoDB
       ]
    }
 ])
+
+> db.Books.find({title: "MongoDB Overview"});
+> db.Books.find({likes: {$lt: 30}}) $gt etc...
+   You can perform text search 
+   We put authors and title as textIndex first
+> db.Books.find({$text: { $search: "golden"}});
 ```
 
 

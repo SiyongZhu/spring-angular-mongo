@@ -1,11 +1,15 @@
 package com.syz.springangular.demo.controller;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.syz.springangular.demo.models.Book;
 import com.syz.springangular.demo.repository.BookRepository;
+import com.syz.springangular.demo.utils.SharedParameters;
 
 @CrossOrigin(origins = "http://localhost:4200") //or use * to denote all requests origin are ok
 @RestController
@@ -57,14 +62,32 @@ public class BookController {
 	@GetMapping("/all")
 	public List<Book> getAll(){
 	    logger.info("Listing All Books");
-		List<Book> books = this.bookRepository.findAll();
-		books.sort(new Comparator<Book>() {
-		    @Override
-		    public int compare(Book o1, Book o2) {
-		        return 0 - o1.getPublishDate().compareTo(o2.getPublishDate());
-		    }
-        });
-		return books;
+		Page<Book> books = this.bookRepository.findAll(PageRequest.of(0, SharedParameters.DEFAULT_BOOKS_PER_PAGE, Sort.by(Order.desc("publishDate"))));
+//		books.sort(new Comparator<Book>() {
+//		    @Override
+//		    public int compare(Book o1, Book o2) {
+//		        return 0 - o1.getPublishDate().compareTo(o2.getPublishDate());
+//		    }
+//        });
+		return books.getContent();
+	}
+	
+	@GetMapping("/tag/{tag}")
+	public List<Book> getBooksByTag(@PathVariable String tag){
+	    logger.info("Get Books by Tag "+tag);
+	    Page<Book> pageBooks = this.bookRepository.findByTags(tag, PageRequest.of(0, SharedParameters.DEFAULT_BOOKS_PER_PAGE, Sort.by(Order.desc("publishDate"))));
+	    logger.info("Found total pages "+pageBooks.getTotalPages()); 
+
+	    return pageBooks.getContent();
+	}
+	
+	@GetMapping("/search/{text}")
+	public List<Book> getBooksByTextSearch(@PathVariable String text){
+	    logger.info("Search Books that fits "+text);
+	    TextCriteria criteria = TextCriteria.forDefaultLanguage().matching(text);
+	    List<Book> books = bookRepository.findAllBy(criteria, Sort.by(Order.desc("textScore")));
+	    
+	    return books;
 	}
 	
 	
