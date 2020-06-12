@@ -1,12 +1,13 @@
 package com.syz.springangular.demo.controller;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.query.TextCriteria;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.syz.springangular.demo.models.Book;
 import com.syz.springangular.demo.repository.BookRepository;
 import com.syz.springangular.demo.utils.SharedParameters;
+import com.syz.springangular.demo.utils.SharedUtilsFunction;
 
 @CrossOrigin(origins = "http://localhost:4200") //or use * to denote all requests origin are ok
 @RestController
@@ -62,20 +64,15 @@ public class BookController {
 	@GetMapping("/all")
 	public List<Book> getAll(){
 	    logger.info("Listing All Books");
-		Page<Book> books = this.bookRepository.findAll(PageRequest.of(0, SharedParameters.DEFAULT_BOOKS_PER_PAGE, Sort.by(Order.desc("publishDate"))));
-//		books.sort(new Comparator<Book>() {
-//		    @Override
-//		    public int compare(Book o1, Book o2) {
-//		        return 0 - o1.getPublishDate().compareTo(o2.getPublishDate());
-//		    }
-//        });
+		Page<Book> books = this.bookRepository.findAll( SharedParameters.sortByPublishDatePage );
+
 		return books.getContent();
 	}
 	
 	@GetMapping("/tag/{tag}")
 	public List<Book> getBooksByTag(@PathVariable String tag){
 	    logger.info("Get Books by Tag "+tag);
-	    Page<Book> pageBooks = this.bookRepository.findByTags(tag, PageRequest.of(0, SharedParameters.DEFAULT_BOOKS_PER_PAGE, Sort.by(Order.desc("publishDate"))));
+	    Page<Book> pageBooks = this.bookRepository.findByTags(tag, SharedParameters.sortByPublishDatePage);
 	    logger.info("Found total pages "+pageBooks.getTotalPages()); 
 
 	    return pageBooks.getContent();
@@ -88,6 +85,21 @@ public class BookController {
 	    List<Book> books = bookRepository.findAllBy(criteria, Sort.by(Order.desc("textScore")));
 	    
 	    return books;
+	}
+	
+	@GetMapping("/date/{year}/{month}")
+	public List<Book> getBookByYearMonth(@PathVariable String year, @PathVariable String month) {
+	    Date publish;
+        try {
+            publish = SharedUtilsFunction.constructDateByYearMonth(year, month);
+            List<Book> books = this.bookRepository.findAllByPublishDate(publish);
+            logger.info(String.format("Found %d books published in %s", books.size(), publish));
+            return books;
+        } catch (ParseException e) {
+            logger.error(String.format("Failed to parse %s and %s", year, month));
+            return null;
+        }
+	    
 	}
 	
 	

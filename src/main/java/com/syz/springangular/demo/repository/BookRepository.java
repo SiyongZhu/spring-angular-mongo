@@ -1,5 +1,6 @@
 package com.syz.springangular.demo.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -22,12 +23,13 @@ public interface BookRepository extends MongoRepository<Book, String>, QuerydslP
     public Page<Book> findByTags(String tag, Pageable pageable);
     
     
-    @Query(value = "{address.city:?0}")
-    List<Book> findByText(String text);
+//    @Query(value = "{address.city:?0}")
+//    List<Book> findByText(String text);
     
-    List<Book> findAllBy(TextCriteria criteria);
     List<Book> findAllBy(TextCriteria criteria, Sort sort);
     Page<Book> findAllBy(TextCriteria criteria, Pageable pageable);
+    
+    List<Book> findAllByPublishDate(Date publish);
     List<Book> findByTitleOrderByTextScoreDesc(String title, TextCriteria criteria);
     
 }

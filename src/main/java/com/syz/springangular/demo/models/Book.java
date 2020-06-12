@@ -23,6 +23,8 @@ public class Book {
 	private String imageUrl;
 	@Indexed(direction = IndexDirection.DESCENDING)
 	private Date publishDate;
+	@Indexed(direction = IndexDirection.ASCENDING)
+	private Date createdDate;
 	private List<String> tags;
 	private List<Review> reviews;
 	private boolean likes;
@@ -40,6 +42,7 @@ public class Book {
 		this.authors = authors;
 		this.publishDate = publishDate;
 		this.tags = tags;
+		this.createdDate = new Date();
 	}
 
 	public String getTitle() {
@@ -81,6 +84,12 @@ public class Book {
     public Float getTextScore() {
         return textScore;
     }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+    
+    
 
 	
 	
