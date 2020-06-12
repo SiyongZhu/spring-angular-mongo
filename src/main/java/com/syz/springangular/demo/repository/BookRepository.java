@@ -1,5 +1,6 @@
 package com.syz.springangular.demo.repository;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,10 +22,13 @@ import com.syz.springangular.demo.models.Book;
 public interface BookRepository extends MongoRepository<Book, String>, QuerydslPredicateExecutor<Book> {
 
     public Page<Book> findByTags(String tag, Pageable pageable);
+    public Page<Book> findByTags(List<String> tags, Pageable pageable);
+    public Page<Book> findByTagsIn(List<String> tags, Pageable pageable);
     
+//    db.books.find( { tags: { $all: ["fiction", "french"] } } )
+    @Query(value="{ 'tags' : {$all : ?0 }}")
+    public List<Book> findAnyOfTags(String[] tags);
     
-//    @Query(value = "{address.city:?0}")
-//    List<Book> findByText(String text);
     
     List<Book> findAllBy(TextCriteria criteria, Sort sort);
     Page<Book> findAllBy(TextCriteria criteria, Pageable pageable);

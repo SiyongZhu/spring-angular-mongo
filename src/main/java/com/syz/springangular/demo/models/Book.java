@@ -1,5 +1,6 @@
 package com.syz.springangular.demo.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class Book {
 		this.publishDate = publishDate;
 		this.tags = tags;
 		this.createdDate = new Date();
+		this.reviews = new ArrayList<Review>();
 	}
 
 	public String getTitle() {
@@ -56,6 +58,10 @@ public class Book {
 	public List<String> getTags() {
 		return tags;
 	}
+	
+	public void addTag(String tag) {
+	    tags.add(tag);
+	}
 
 	public boolean getLikes() {
 		return likes;
@@ -63,6 +69,10 @@ public class Book {
 
 	public List<Review> getReviews() {
 		return reviews;
+	}
+	
+	public void addReview(Review review) {
+	    this.reviews.add(review);
 	}
 
     public String getImageUrl() {

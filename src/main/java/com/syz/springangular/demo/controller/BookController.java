@@ -1,6 +1,8 @@
 package com.syz.springangular.demo.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.syz.springangular.demo.models.Book;
@@ -71,11 +74,24 @@ public class BookController {
 	
 	@GetMapping("/tag/{tag}")
 	public List<Book> getBooksByTag(@PathVariable String tag){
+	     
 	    logger.info("Get Books by Tag "+tag);
-	    Page<Book> pageBooks = this.bookRepository.findByTags(tag, SharedParameters.sortByPublishDatePage);
+	    Page<Book> pageBooks = this.bookRepository.findByTags(tag.toLowerCase(), SharedParameters.sortByPublishDatePage);
 	    logger.info("Found total pages "+pageBooks.getTotalPages()); 
 
 	    return pageBooks.getContent();
+	}
+	
+	@GetMapping("/multi-tags")
+	public List<Book> getBooksByTags(@RequestParam("tags") String[] tags){
+	    logger.info("search books for "+ Arrays.toString(tags));
+	    
+//	    Page<Book> pageBooks = this.bookRepository.findByTagsIn(Arrays.asList(tags), SharedParameters.sortByPublishDatePage);
+//	    Page<Book> pageBooks = this.bookRepository.findByTags(Arrays.asList(tags), SharedParameters.sortByPublishDatePage);
+//	    return pageBooks.getContent();
+	    List<Book> books = this.bookRepository.findAnyOfTags(tags);
+	    return books;
+	    
 	}
 	
 	@GetMapping("/search/{text}")

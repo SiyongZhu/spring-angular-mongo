@@ -3,12 +3,12 @@ package com.syz.springangular.demo.models;
 public class Review {
 	private String reviewer;
 	private String message;
+	private String reviewUrl;
 	
 	
-	public Review(String reviewer, String message) {
+	public Review(String reviewer) {
 		super();
 		this.reviewer = reviewer;
-		this.message = message;
 	}
 
 	public String getReviewer() {
@@ -19,6 +19,18 @@ public class Review {
 		return message;
 	}
 	
+	public void setMessage(String message) {
+	    this.message = message;
+	}
+
+    public String getReviewURL() {
+        return reviewUrl;
+    }
+
+    public void setReviewUrl(String reviewURL) {
+        this.reviewUrl = reviewURL;
+    }
+
 	
 	
 	
