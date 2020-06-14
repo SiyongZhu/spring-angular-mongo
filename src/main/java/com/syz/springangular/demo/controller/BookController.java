@@ -81,6 +81,15 @@ public class BookController {
 	    return pageBooks.getContent();
 	}
 	
+	@GetMapping("/author/{author}")
+	public List<Book> getBooksByAuthor(@PathVariable String author){
+	     
+	    logger.info("Get Books by Author "+author);
+	    List<Book> books = this.bookRepository.findAllByAuthors(author);
+
+	    return books;
+	}
+	
 	@GetMapping("/multi-tags")
 	public List<Book> getBooksByTags(@RequestParam("tags") String[] tags){
 	    logger.info("search books for "+ Arrays.toString(tags));

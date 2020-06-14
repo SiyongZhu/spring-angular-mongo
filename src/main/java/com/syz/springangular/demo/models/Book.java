@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.TextScore;
+
+import com.syz.springangular.demo.utils.SharedParameters;
 
 @Document(collection = "Books")
 public class Book {
@@ -33,8 +37,8 @@ public class Book {
 	@TextScore
 	private Float textScore;
 	
+	
 	public Book (){
-        
     }
 	
 	public Book(String title, List<String> authors, Date publishDate, List<String> tags) {
@@ -45,6 +49,19 @@ public class Book {
 		this.tags = tags;
 		this.createdDate = new Date();
 		this.reviews = new ArrayList<Review>();
+		
+//		tags.forEach(t -> {
+//			BookTag bookTag = SharedParameters.booktags.stream().filter(bt -> bt.getTagName().equals(t)).findFirst().orElse(new BookTag(t));
+//			boolean tagPresent = SharedParameters.booktags.stream().filter(bt -> bt.getTagName().equals(t)).findFirst().isPresent();
+			
+//			if(!tagPresent) {
+//				System.out.println("Found new tag " + t);
+//				BookTag newTag = new BookTag(t);
+//				SharedParameters.booktags.add(newTag);
+//			}else {
+//				SharedParameters.booktags.get(0);
+//			}
+//		});
 	}
 
 	public String getTitle() {

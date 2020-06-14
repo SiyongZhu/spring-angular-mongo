@@ -33,6 +33,8 @@ public interface BookRepository extends MongoRepository<Book, String>, QuerydslP
     Page<Book> findAllBy(TextCriteria criteria, Pageable pageable);
     
     List<Book> findAllByPublishDate(Date publish);
+    List<Book> findAllByAuthors(String author);
+    
     List<Book> findByTitleOrderByTextScoreDesc(String title, TextCriteria criteria);
     
 }
