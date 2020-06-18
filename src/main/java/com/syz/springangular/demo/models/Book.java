@@ -63,6 +63,10 @@ public class Book {
 //			}
 //		});
 	}
+	
+	public String getId() {
+		return this.id;
+	}
 
 	public String getTitle() {
 		return title;

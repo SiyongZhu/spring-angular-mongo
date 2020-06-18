@@ -66,9 +66,9 @@ public class BookController {
 	@GetMapping("/all")
 	public List<Book> getAll(){
 	    logger.info("Listing All Books");
-		Page<Book> books = this.bookRepository.findAll( SharedParameters.sortByPublishDatePage );
+//		Page<Book> books = this.bookRepository.findAll( SharedParameters.sortByPublishDatePage );
 
-		return books.getContent();
+		return this.bookRepository.findAll();
 	}
 	
 	@GetMapping("/tag/{tag}")
